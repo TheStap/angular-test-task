@@ -73,7 +73,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "test-task:build"
+            "browserTarget": "test-task:build",
+            "port": 80
           },
           "configurations": {
             "production": {
