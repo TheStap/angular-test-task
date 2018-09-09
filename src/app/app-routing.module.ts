@@ -3,7 +3,9 @@ import {Routes, RouterModule} from '@angular/router';
 import {AuthComponent} from './auth/auth.component';
 import {SearchComponent} from './search/search.component';
 import {TokenGuard} from './token.guard';
-import {AUTH_ROUTE, SEARCH_ROUTE} from './routes';
+import {AUTH_ROUTE, QUESTIONS_ROUTE, SEARCH_ROUTE} from './routes';
+import {QuestionsComponent} from './questions/questions.component';
+import {QuestionsResolver} from './questions/questions.resolver';
 
 
 const routes: Routes = [
@@ -24,6 +26,13 @@ const routes: Routes = [
                 path: SEARCH_ROUTE,
                 component: SearchComponent
             },
+            {
+                path: QUESTIONS_ROUTE,
+                component: QuestionsComponent,
+                resolve: {
+                    questions: QuestionsResolver
+                }
+            }
         ]
     },
     {
@@ -34,7 +43,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
+    providers: [QuestionsResolver]
 })
 export class AppRoutingModule {
 }

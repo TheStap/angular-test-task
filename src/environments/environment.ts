@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    apiBaseUrl: 'https://api.stackexchange.com/2.2/',
+    site: 'stackoverflow',
+    clientId: 13060,
+    key: 'yVx2*fXozwIGv4FUR9frEA((',
+    channelUrl: 'http://localhost/blankPage',
 };
 
 /*

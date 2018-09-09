@@ -3,4 +3,15 @@
 
 body {
     font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    margin: 0;
+}
+
+.clearfix:after{
+    content: '';
+    clear: both;
+    display: table;
+}
+
+* {
+    box-sizing: border-box;
 }

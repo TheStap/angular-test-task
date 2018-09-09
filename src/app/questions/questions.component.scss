@@ -1,0 +1,21 @@
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.questions-page {
+    transition: .3s;
+    &__questions {
+        width: 100%;
+        float: left;
+        &--quick-view-opened {
+            width: 50%;
+            border-right: 1px solid black;
+        }
+    }
+
+    &__quick-view-questions {
+        width: 50%;
+        float: right;
+    }
+}

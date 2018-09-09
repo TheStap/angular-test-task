@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {environment} from '../environments/environment';
 
 declare const SE: any;
 
@@ -28,14 +29,13 @@ export class SEService {
 
     init(): Subject<InitData> {
         const subject = new Subject<InitData>();
-        // todo вынести в конфиг
+        const {clientId, key, channelUrl} = environment;
         SE.init({
-            clientId: 13060,
-            key: 'yVx2*fXozwIGv4FUR9frEA((',
-            channelUrl: 'http://localhost:4200/auth',
+            clientId,
+            key,
+            channelUrl,
             complete: (data: InitData) => {
                 subject.next(data);
-                console.log('Run Example With Version ' + data.version);
             }
         });
         return subject;

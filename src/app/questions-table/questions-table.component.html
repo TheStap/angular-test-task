@@ -1,0 +1,25 @@
+<table mat-table [dataSource]="questions" class="questions-table">
+    <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef>Author</th>
+        <td mat-cell *matCellDef="let element" (click)="search({user: element.owner.user_id})">{{element.owner.display_name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">{{element.title}}</td>
+    </ng-container>
+    <ng-container matColumnDef="answers count">
+        <th mat-header-cell *matHeaderCellDef>Answers count</th>
+        <td mat-cell *matCellDef="let element">{{element.answer_count}}</td>
+    </ng-container>
+    <ng-container matColumnDef="tags">
+        <th mat-header-cell *matHeaderCellDef>Tags</th>
+        <td mat-cell *matCellDef="let element">
+            <span *ngFor="let tag of element.tags" (click)="search({tag: tag})">
+                {{tag}}
+            </span>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
