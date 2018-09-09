@@ -1,7 +1,7 @@
 <div class="questions-page clearfix">
     <app-questions-table
         class="questions-page__questions"
-        [ngClass]="{'questions-page__questions--quick-view-opened': !quickViewQuestionsLoading && quickViewQuestions.length}"
+        [ngClass]="{'questions-page__questions--quick-view-opened': quickViewQuestionsLoading || quickViewQuestions.length}"
         [questions]="questions"
         (quickViewSearch)="quickViewSearch($event)"
     ></app-questions-table>
