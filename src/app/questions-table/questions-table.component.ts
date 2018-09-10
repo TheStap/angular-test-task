@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Question} from '../questions/questions.model';
 import {AdvancedQuestionSearchQueryParams} from '../api.service';
+import {ANSWERS_ROUTE} from '../routes';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-questions-table',
@@ -13,10 +15,11 @@ export class QuestionsTableComponent implements OnInit {
     @Input()
     questions: Question[] = [];
     @Output() quickViewSearch = new EventEmitter<AdvancedQuestionSearchQueryParams>();
+
     @Input()
     loading: boolean;
 
-    constructor() {
+    constructor(private router: Router) {
     }
 
     ngOnInit() {
@@ -26,4 +29,7 @@ export class QuestionsTableComponent implements OnInit {
         this.quickViewSearch.emit(params);
     }
 
+    answerRedirect(questionId: number) {
+        this.router.navigate([ANSWERS_ROUTE], {queryParams: {id: questionId}});
+    }
 }

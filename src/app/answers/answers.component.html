@@ -1,0 +1,7 @@
+<div *ngIf="!answers.length; else answersBlock">
+    No questions found for this answer
+</div>
+<div #answersBlock *ngFor="let answer of answers">
+    {{answer.owner}}
+    <div [innerHtml]="answer.body"></div>
+</div>

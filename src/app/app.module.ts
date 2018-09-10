@@ -16,6 +16,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { QuestionsComponent } from './questions/questions.component';
 import {FormsModule} from '@angular/forms';
 import { QuestionsTableComponent } from './questions-table/questions-table.component';
+import { AnswersComponent } from './answers/answers.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { QuestionsTableComponent } from './questions-table/questions-table.compo
         AuthComponent,
         SearchComponent,
         QuestionsComponent,
-        QuestionsTableComponent
+        QuestionsTableComponent,
+        AnswersComponent
     ],
     imports: [
         FormsModule,
