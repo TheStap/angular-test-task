@@ -1,18 +1,20 @@
-<mat-form-field class="example-full-width">
-    <input
-        matInput
-        placeholder="Search..."
-        [(ngModel)]="query"
-        (keyup.enter)="search()">
-</mat-form-field>
-<button
-    mat-raised-button
-    color="primary"
-    (click)="search()"
-    [disabled]="loading">
-    GO!
-</button>
-<mat-spinner
-    *ngIf="loading"
-    diameter="30">
-</mat-spinner>
+<div class="search">
+    <mat-form-field class="search__input">
+        <input
+            matInput
+            placeholder="Search..."
+            [(ngModel)]="query"
+            (keyup.enter)="search()">
+    </mat-form-field>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="search()"
+        [disabled]="loading">
+        GO!
+    </button>
+    <mat-spinner
+        *ngIf="loading"
+        diameter="30">
+    </mat-spinner>
+</div>

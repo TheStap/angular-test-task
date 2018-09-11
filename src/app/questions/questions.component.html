@@ -6,9 +6,12 @@
         (quickViewSearch)="quickViewSearch($event)"
     ></app-questions-table>
     <div class="questions-page__quick-view-questions">
-        <mat-spinner
-            *ngIf="quickViewQuestionsLoading">
-        </mat-spinner>
+        <div class="questions-page__spinner-wrap">
+            <mat-spinner
+                class="questions-page__spinner"
+                *ngIf="quickViewQuestionsLoading">
+            </mat-spinner>
+        </div>
         <app-questions-table
             [questions]="quickViewQuestions"
             *ngIf="!quickViewQuestionsLoading && quickViewQuestions.length">

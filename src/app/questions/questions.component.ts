@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Question} from './questions.model';
 import {List} from '../model';
 import {AdvancedQuestionSearchQueryParams, ApiService} from '../api.service';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app-questions',
@@ -14,7 +15,7 @@ export class QuestionsComponent implements OnInit {
     quickViewQuestions: Question[] = [];
     quickViewQuestionsLoading: boolean;
 
-    constructor(private route: ActivatedRoute,  private apiService: ApiService) {
+    constructor(private route: ActivatedRoute,  private apiService: ApiService, private notificationsService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -30,7 +31,7 @@ export class QuestionsComponent implements OnInit {
             .subscribe((data: List<Question>) => {
                 this.quickViewQuestions = data.items;
             }, () => {
-
+                this.notificationsService.error('Error', 'failed to load questions');
             }, () => {
                 this.quickViewQuestionsLoading = false;
             });

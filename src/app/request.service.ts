@@ -12,9 +12,14 @@ export class RequestService {
 
     }
 
-    get<T>(queryParams: QueryParams, url: Array<string | number>): Observable<T> {
+    get<T>(queryParams: QueryParams, url: Array<string | number>, needSite = true): Observable<T> {
         const {site, apiBaseUrl} = environment;
-        const params = {site, ...queryParams};
+        let params;
+        if (needSite) {
+            params = {site, ...queryParams};
+        } else {
+            params = queryParams;
+        }
         return this.http.get<T>(`${apiBaseUrl}${url.join('/')}`, {params});
     }
 }

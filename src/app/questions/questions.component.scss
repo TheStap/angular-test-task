@@ -13,4 +13,13 @@
         width: 50%;
         float: right;
     }
+
+    &__spinner-wrap {
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    &__spinner  {
+        display: inline-block;
+    }
 }

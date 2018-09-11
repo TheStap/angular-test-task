@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AUTH_ROUTE, SEARCH_ROUTE} from './routes';
 import {NotificationsService} from 'angular2-notifications';
 import {mergeMap} from 'rxjs/internal/operators';
+import {ApiService} from './api.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,18 +14,28 @@ export class SessionService {
     private expirationDate: string;
     redirectUrl: string;
 
-    constructor(private router: Router, private notificationService: NotificationsService, private sEService: SEService) {
+    constructor(private router: Router, private notificationService: NotificationsService, private sEService: SEService, private apiService: ApiService) {
 
     }
 
     checkExpirationToken() {
         const expirationDate = this.getTokenExpirationDate();
+
         if (expirationDate) {
             const expirationDateInMs = +new Date(expirationDate);
             const currentDateInMS = +new Date();
-            const isTokenExpired =  expirationDateInMs < currentDateInMS;
+            const isTokenExpired = expirationDateInMs < currentDateInMS;
             if (isTokenExpired) {
                 this.logout();
+            } else {
+                this.apiService.checkToken(this.getToken())
+                    .subscribe((tokenValid) => {
+                        if (!tokenValid) {
+                            this.logout();
+                        }
+                    }, (e) => {
+                        this.notificationService.error('Error', 'failed to get token info');
+                    });
             }
         }
     }

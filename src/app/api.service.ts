@@ -3,6 +3,7 @@ import {RequestService} from './request.service';
 import {Question} from './questions/questions.model';
 import {List} from './model';
 import {Answer} from './answers/answers.model';
+import {map} from 'rxjs/internal/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +21,10 @@ export class ApiService {
     getAnswersByQuestionId(id: number) {
         const params = {filter: '!9Z(-wzu0T'}; // add body field to response
         return this.requestService.get<List<Answer>>(params, ['questions', id, 'answers']);
+    }
+
+    checkToken(token: string) {
+        return this.requestService.get<List<AccessToken>>({}, ['access-tokens', token], false).pipe(map(list => !!list.items.length));
     }
 }
 
@@ -39,4 +44,10 @@ export interface Owner {
     profile_image: string;
     display_name: string;
     link: string;
+}
+
+export interface AccessToken {
+    account_id: number;
+    expires_on_date: number;
+    access_token: string;
 }
