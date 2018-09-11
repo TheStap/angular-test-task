@@ -8,7 +8,9 @@
     <h1 *ngIf="!answers.length && !loading; else answersBlock">
         No answers found for this question
     </h1>
-    <div #answersBlock *ngFor="let answer of answers" class="answers__answer">
-        <div [innerHtml]="answer.body"></div>
-    </div>
+    <ng-template #answersBlock>
+        <div *ngFor="let answer of answers" class="answers__answer">
+            <div [innerHtml]="answer.body"></div>
+        </div>
+    </ng-template>
 </div>
