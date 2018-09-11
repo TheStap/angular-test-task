@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
 import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
 import {AUTH_ROUTE} from '../routes';
-import {mergeMap} from 'rxjs/internal/operators';
+import {map, mergeMap} from 'rxjs/internal/operators';
 import {Answer} from './answers.model';
 import {List} from '../model';
-import {EMPTY} from 'rxjs/index';
+import {EMPTY, forkJoin} from 'rxjs/index';
 
 @Component({
     selector: 'app-answers',
@@ -27,11 +27,17 @@ export class AnswersComponent implements OnInit {
                     this.router.navigateByUrl(AUTH_ROUTE);
                     result = EMPTY;
                 } else {
-                    result = this.apiService.getAnswersByQuestionId(id);
+                    // return forkJoin(this.apiService.getQuestionsByIds([id]), this.apiService.getAnswersByQuestionId(id)).pipe(map(a => {
+                    //     console.log(a);
+                    // })).subscribe(r => {
+                    //     console.log(r);
+                    // })
+                    result = forkJoin(this.apiService.getQuestionById(id), this.apiService.getAnswersByQuestionId(id));
                 }
                 return result;
             }))
             .subscribe((answersList: List<Answer> | never) => {
+                console.log(answersList);
                 this.answers = answersList ? answersList.items : [];
             }, e => {
                 console.log(e);

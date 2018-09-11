@@ -3,8 +3,17 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     padding-right: 10px;
 }
 
+$hover-table-item-color: #eae6e6;
+
 
 .questions-table {
     width: 100%;
     padding: 10px;
+    &__clickable-elem {
+        cursor: pointer;
+        transition: .3s;
+        &:hover {
+            background-color: $hover-table-item-color;
+        }
+    }
 }

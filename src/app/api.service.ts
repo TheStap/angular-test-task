@@ -3,6 +3,8 @@ import {RequestService} from './request.service';
 import {Question} from './questions/questions.model';
 import {List} from './model';
 import {Answer} from './answers/answers.model';
+import {map} from 'rxjs/internal/operators';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -20,6 +22,14 @@ export class ApiService {
     getAnswersByQuestionId(id: number) {
         const params = {filter: '!9Z(-wzu0T'}; // add body field to response
         return this.requestService.get<List<Answer>>(params, ['questions', id, 'answers']);
+    }
+
+    getQuestionsByIds(ids: number[]) {
+        return this.requestService.get<List<Question>>({}, ['questions', ids]);
+    }
+
+    getQuestionById(id): Observable<Question> {
+        return this.getQuestionsByIds([id]).pipe(map(questions => questions.items ? questions.items[0] : null));
     }
 }
 

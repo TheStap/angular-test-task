@@ -1,16 +1,19 @@
 <div class="questions-page clearfix">
     <app-questions-table
-        class="questions-page__questions"
+        class="questions-page__questions questions-page__questions--all"
         [ngClass]="{'questions-page__questions--quick-view-opened': quickViewQuestionsLoading || quickViewQuestions.length}"
         [questions]="questions"
         (quickViewSearch)="quickViewSearch($event)"
+        [title]="questionsTitle"
     ></app-questions-table>
-    <div class="questions-page__quick-view-questions">
+    <div class="questions-page__questions questions-page__questions-view">
         <mat-spinner
             *ngIf="quickViewQuestionsLoading">
         </mat-spinner>
         <app-questions-table
+            [title]="quickViewQuestionsTitle"
             [questions]="quickViewQuestions"
+            (quickViewSearch)="quickViewSearch($event)"
             *ngIf="!quickViewQuestionsLoading && quickViewQuestions.length">
         </app-questions-table>
     </div>

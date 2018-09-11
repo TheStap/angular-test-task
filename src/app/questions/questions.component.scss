@@ -1,16 +1,20 @@
 .questions-page {
     transition: .3s;
+    height: 100%;
     &__questions {
-        width: 100%;
-        float: left;
+        height: 100%;
+        overflow: auto;
+        &--all {
+            width: 100%;
+            float: left;
+        }
+        &--quick-view {
+            width: 50%;
+            float: right;
+        }
         &--quick-view-opened {
             width: 50%;
             border-right: 1px solid black;
         }
-    }
-
-    &__quick-view-questions {
-        width: 50%;
-        float: right;
     }
 }

@@ -12,7 +12,7 @@ export class RequestService {
 
     }
 
-    get<T>(queryParams: QueryParams, url: Array<string | number>): Observable<T> {
+    get<T>(queryParams: QueryParams, url: Array<string | number | number[]>): Observable<T> {
         const {site, apiBaseUrl} = environment;
         const params = {site, ...queryParams};
         return this.http.get<T>(`${apiBaseUrl}${url.join('/')}`, {params});
