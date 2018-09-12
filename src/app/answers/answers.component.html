@@ -1,4 +1,12 @@
 <div class="answers">
+    <div class="answers__question">
+        <h1 class="answers__question-title">
+            {{question.title}}
+        </h1>
+        <div class="answers__question-body" [innerHtml]="question.body">
+
+        </div>
+    </div>
     <div class="answers__spinner-wrap">
         <mat-spinner
             class="answers__spinner"

@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {Question} from './questions.model';
 import {List} from '../model';
 import {AdvancedQuestionSearchQueryParams, ApiService} from '../api.service';
-import {forkJoin} from 'rxjs';
 import {NotificationsService} from 'angular2-notifications';
 
 @Component({
@@ -24,7 +23,7 @@ export class QuestionsComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe((params) => {
-            this.questionsTitle = `${this.baseTitle} ${params.q}`;
+            this.questionsTitle = `${this.baseTitle} query ${params.q}`;
         });
         this.route.data
             .subscribe((data: { questions: List<Question> }) => {

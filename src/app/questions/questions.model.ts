@@ -12,4 +12,5 @@ export interface Question {
     question_id: number;
     link: string;
     title: string;
+    body: string;
 }

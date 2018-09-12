@@ -29,7 +29,8 @@ export class ApiService {
     }
 
     getQuestionsByIds(ids: number[]) {
-        return this.requestService.get<List<Question>>({}, ['questions', ids]);
+        const params = {filter: '!9Z(-wwYGT'}; // add body field to response
+        return this.requestService.get<List<Question>>(params, ['questions', ids]);
     }
 
     getQuestionById(id): Observable<Question> {
