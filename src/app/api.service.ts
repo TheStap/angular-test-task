@@ -24,6 +24,10 @@ export class ApiService {
         return this.requestService.get<List<Answer>>(params, ['questions', id, 'answers']);
     }
 
+    checkToken(token: string) {
+        return this.requestService.get<List<AccessToken>>({}, ['access-tokens', token], false).pipe(map(list => !!list.items.length));
+    }
+
     getQuestionsByIds(ids: number[]) {
         return this.requestService.get<List<Question>>({}, ['questions', ids]);
     }
@@ -49,4 +53,10 @@ export interface Owner {
     profile_image: string;
     display_name: string;
     link: string;
+}
+
+export interface AccessToken {
+    account_id: number;
+    expires_on_date: number;
+    access_token: string;
 }

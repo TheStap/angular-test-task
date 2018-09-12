@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AUTH_ROUTE} from '../routes';
-import {map, mergeMap} from 'rxjs/internal/operators';
+import {finalize, mergeMap, map} from 'rxjs/internal/operators';
 import {Answer} from './answers.model';
 import {List} from '../model';
 import {EMPTY, forkJoin} from 'rxjs/index';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app-answers',
@@ -14,11 +15,14 @@ import {EMPTY, forkJoin} from 'rxjs/index';
 })
 export class AnswersComponent implements OnInit {
     answers: Answer[] = [];
+    loading = false;
 
-    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router) {
+    constructor(private apiService: ApiService, private route: ActivatedRoute, private router: Router,
+                private notificationsService: NotificationsService) {
     }
 
     ngOnInit() {
+        this.loading = true;
         this.route.queryParams.pipe(
             mergeMap((params) => {
                 let result;
@@ -27,20 +31,26 @@ export class AnswersComponent implements OnInit {
                     this.router.navigateByUrl(AUTH_ROUTE);
                     result = EMPTY;
                 } else {
+                    result = this.apiService.getAnswersByQuestionId(id)
+                        .pipe(
+                            finalize(() => {
+                                this.loading = false;
+                            })
+                        );
                     // return forkJoin(this.apiService.getQuestionsByIds([id]), this.apiService.getAnswersByQuestionId(id)).pipe(map(a => {
                     //     console.log(a);
                     // })).subscribe(r => {
                     //     console.log(r);
                     // })
-                    result = forkJoin(this.apiService.getQuestionById(id), this.apiService.getAnswersByQuestionId(id));
+                    // result = forkJoin(this.apiService.getQuestionById(id), this.apiService.getAnswersByQuestionId(id));
                 }
                 return result;
-            }))
+            })
+        )
             .subscribe((answersList: List<Answer> | never) => {
-                console.log(answersList);
                 this.answers = answersList ? answersList.items : [];
-            }, e => {
-                console.log(e);
+            }, () => {
+                this.notificationsService.error('Error', 'failed to load answers');
             });
     }
 

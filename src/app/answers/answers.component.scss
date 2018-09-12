@@ -1,0 +1,16 @@
+.answers {
+    &__answer {
+        border: 1px solid black;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    &__spinner-wrap {
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    &__spinner  {
+        display: inline-block;
+    }
+}

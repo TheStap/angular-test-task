@@ -1,7 +1,16 @@
-<div *ngIf="!answers.length; else answersBlock">
-    No questions found for this answer
-</div>
-<div #answersBlock *ngFor="let answer of answers">
-    {{answer.owner}}
-    <div [innerHtml]="answer.body"></div>
+<div class="answers">
+    <div class="answers__spinner-wrap">
+        <mat-spinner
+            class="answers__spinner"
+            *ngIf="loading">
+        </mat-spinner>
+    </div>
+    <h1 *ngIf="!answers.length && !loading; else answersBlock">
+        No answers found for this question
+    </h1>
+    <ng-template #answersBlock>
+        <div *ngFor="let answer of answers" class="answers__answer">
+            <div [innerHtml]="answer.body"></div>
+        </div>
+    </ng-template>
 </div>

@@ -17,4 +17,13 @@
             border-right: 1px solid black;
         }
     }
+
+    &__spinner-wrap {
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    &__spinner  {
+        display: inline-block;
+    }
 }

@@ -1,5 +1,6 @@
+<h1 *ngIf="!questions.length">No questions found by this query</h1>
 <h1 *ngIf="title">{{title}}</h1>
-<table mat-table [dataSource]="questions" class="questions-table">
+<table *ngIf="questions.length" mat-table [dataSource]="questions" class="questions-table">
     <ng-container matColumnDef="author">
         <th mat-header-cell *matHeaderCellDef>Author</th>
         <td mat-cell

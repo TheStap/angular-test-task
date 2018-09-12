@@ -4,6 +4,7 @@ import {Question} from './questions.model';
 import {List} from '../model';
 import {AdvancedQuestionSearchQueryParams, ApiService} from '../api.service';
 import {forkJoin} from 'rxjs';
+import {NotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app-questions',
@@ -18,7 +19,7 @@ export class QuestionsComponent implements OnInit {
     quickViewQuestionsTitle = '';
     private baseTitle = 'Search results by';
 
-    constructor(private route: ActivatedRoute,  private apiService: ApiService) {
+    constructor(private route: ActivatedRoute,  private apiService: ApiService, private notificationsService: NotificationsService) {
     }
 
     ngOnInit() {
@@ -38,7 +39,7 @@ export class QuestionsComponent implements OnInit {
                 this.quickViewQuestions = data.items;
                 this.quickViewQuestionsTitle = `${this.baseTitle} ${Object.keys(params)} ${Object.values(params)}`;
             }, () => {
-
+                this.notificationsService.error('Error', 'failed to load questions');
             }, () => {
                 this.quickViewQuestionsLoading = false;
             });

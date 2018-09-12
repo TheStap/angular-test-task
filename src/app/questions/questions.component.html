@@ -7,9 +7,12 @@
         [title]="questionsTitle"
     ></app-questions-table>
     <div class="questions-page__questions questions-page__questions-view">
-        <mat-spinner
-            *ngIf="quickViewQuestionsLoading">
-        </mat-spinner>
+        <div class="questions-page__spinner-wrap">
+            <mat-spinner
+                class="questions-page__spinner"
+                *ngIf="quickViewQuestionsLoading">
+            </mat-spinner>
+        </div>
         <app-questions-table
             [title]="quickViewQuestionsTitle"
             [questions]="quickViewQuestions"
